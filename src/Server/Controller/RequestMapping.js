@@ -1,6 +1,10 @@
+import HttpResponse from '../DTO/HttpResponse.js';
+import CONSTANTS from '../../Util/Constants.js';
+
 class RequestMapping {
   requestAPI(httpRequest) {
-    console.log(httpRequest.restfulAPI);
+    const httpResponse = new HttpResponse(CONSTANTS.error, null);
+    return httpResponse;
   }
 }
 
