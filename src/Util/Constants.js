@@ -3,6 +3,8 @@ const CONSTANTS = Object.freeze({
   success: '[SUCCESS]',
   eventStartDate: 1,
   eventEndDate: 31,
+  menuSplitChar: ',',
+  orderLimitCount: 20,
 });
 
 const MENU = Object.freeze({

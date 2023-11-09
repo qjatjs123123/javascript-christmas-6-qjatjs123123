@@ -8,7 +8,7 @@ class EventController {
   }
 
   handlerOrderMenuAndCount({ userDTO, menuAndCount }) {
-    console.log(userDTO, menuAndCount);
+    userDTO.checkMenuAndCountInvalid(menuAndCount);
   }
 }
 
