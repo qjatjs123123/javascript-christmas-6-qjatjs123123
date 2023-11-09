@@ -3,7 +3,8 @@ import UserDTO from '../DTO/UserDTO.js';
 class EventController {
   checkDateInvalid(expectedVisitDate) {
     const userDTO = new UserDTO(expectedVisitDate);
-    console.log('userDTO', userDTO.expectedVisitDate, expectedVisitDate);
+    userDTO.checkDateInvalid(expectedVisitDate);
+    return userDTO;
   }
 }
 

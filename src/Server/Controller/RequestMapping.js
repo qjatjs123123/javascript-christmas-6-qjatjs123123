@@ -15,7 +15,7 @@ class RequestMapping {
       const responsedata = this.getResponseData(httpRequest);
       return new HttpResponse(CONSTANTS.success, responsedata);
     } catch (error) {
-      return HttpResponse(CONSTANTS.error, error.message);
+      return new HttpResponse(CONSTANTS.error, error.message);
     }
   }
 

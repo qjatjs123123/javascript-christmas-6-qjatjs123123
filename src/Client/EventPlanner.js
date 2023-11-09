@@ -24,6 +24,7 @@ class EventPlanner {
       expectedVisitDate,
       this.inputExpectedVisitDate,
     );
+    console.log(responseData, responseData.expectedVisitDate);
   };
 
   ajax = async (url, data, callback) => {

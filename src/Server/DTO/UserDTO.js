@@ -1,8 +1,12 @@
+import { ERROR_MESSAGE } from '../../Util/Message.js';
+
 class UserDTO {
   #expectedVisitDate;
 
-  constructor(expectedVisitedDate) {
-    this.#expectedVisitDate = expectedVisitedDate;
+  checkDateInvalid(expectedVisitedDate) {
+    const date = Number(expectedVisitedDate);
+    if (Number.isNaN(date)) throw new Error(ERROR_MESSAGE.isChar);
+    this.#expectedVisitDate = date;
   }
 
   get expectedVisitDate() {
