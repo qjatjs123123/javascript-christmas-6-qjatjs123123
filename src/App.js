@@ -9,6 +9,7 @@ class App {
 
   async run() {
     this.#EventPlanner.printWelcomeMessage();
+    this.#EventPlanner.inputExpectedVisitDate();
   }
 }
 
