@@ -8,6 +8,7 @@ import RESTFULAPI from '../Util/API.js';
 
 class EventPlanner {
   #server;
+  #userDTO;
 
   constructor() {
     this.#server = new RequestMapping();
@@ -17,6 +18,10 @@ class EventPlanner {
     OutputView.printWelcomeMessage();
   }
 
+  inputOrderMenuAndCount = async () => {
+    await InputView.readOrderMenuAndCount();
+  };
+
   inputExpectedVisitDate = async () => {
     const expectedVisitDate = await InputView.readDate();
     const responseData = await this.ajax(
@@ -24,7 +29,7 @@ class EventPlanner {
       expectedVisitDate,
       this.inputExpectedVisitDate,
     );
-    console.log(responseData, responseData.expectedVisitDate);
+    if (responseData) this.#userDTO = responseData;
   };
 
   ajax = async (url, data, callback) => {

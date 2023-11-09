@@ -9,7 +9,8 @@ class App {
 
   async run() {
     this.#EventPlanner.printWelcomeMessage();
-    this.#EventPlanner.inputExpectedVisitDate();
+    await this.#EventPlanner.inputExpectedVisitDate();
+    await this.#EventPlanner.inputOrderMenuAndCount();
   }
 }
 
