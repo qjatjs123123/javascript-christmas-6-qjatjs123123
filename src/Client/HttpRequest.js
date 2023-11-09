@@ -1,9 +1,19 @@
-const HttpRequest = (restfulAPI, inputData) => {
-  return {
-    url: restfulAPI,
-    type: 'POST',
-    body: inputData,
-  };
-};
+class HttpRequest {
+  #restfulAPI;
+  #inputData;
+
+  constructor(restfulAPI, inputData) {
+    this.#restfulAPI = restfulAPI;
+    this.#inputData = inputData;
+  }
+
+  get restfulAPI() {
+    return this.#restfulAPI;
+  }
+
+  get inputData() {
+    return this.#inputData;
+  }
+}
 
 export default HttpRequest;
