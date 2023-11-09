@@ -25,7 +25,19 @@ class UserDTO {
     const regex = /.+-[1-9]\d*/;
     orderMenus.forEach((orderMenu) => {
       if (!regex.test(orderMenu)) throw new Error(ERROR_MESSAGE.isNotOrderMenuFormat);
+      this.#checkOrderMenuIsExist(orderMenu);
     });
+  }
+
+  #checkOrderMenuIsExist(orderMenu) {
+    const eventMenus = Object.keys(MENU);
+    let isExist = false;
+    eventMenus.forEach((eventMenu) => {
+      const menuName = orderMenu.split(CONSTANTS.countSplitChar)[0];
+      const eventMenuList = MENU[eventMenu];
+      if (eventMenuList.has(menuName)) isExist = true;
+    });
+    if (!isExist) throw new Error(ERROR_MESSAGE.isNotOrderMenuFormat);
   }
 
   get expectedVisitDate() {

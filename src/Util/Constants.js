@@ -4,6 +4,7 @@ const CONSTANTS = Object.freeze({
   eventStartDate: 1,
   eventEndDate: 31,
   menuSplitChar: ',',
+  countSplitChar: '-',
   orderLimitCount: 20,
 });
 
