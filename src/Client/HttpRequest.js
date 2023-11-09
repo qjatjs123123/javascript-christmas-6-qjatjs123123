@@ -1,18 +1,18 @@
 class HttpRequest {
   #restfulAPI;
-  #inputData;
+  #body;
 
   constructor(restfulAPI, inputData) {
     this.#restfulAPI = restfulAPI;
-    this.#inputData = inputData;
+    this.#body = inputData;
   }
 
   get restfulAPI() {
     return this.#restfulAPI;
   }
 
-  get inputData() {
-    return this.#inputData;
+  get body() {
+    return this.#body;
   }
 }
 

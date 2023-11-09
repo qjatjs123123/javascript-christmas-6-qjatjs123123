@@ -24,7 +24,6 @@ class EventPlanner {
       expectedVisitDate,
       this.inputExpectedVisitDate,
     );
-    console.log(responseData);
   };
 
   ajax = async (url, data, callback) => {
@@ -33,7 +32,7 @@ class EventPlanner {
     if (httpResponse.status === CONSTANTS.error) {
       return await callback();
     }
-    return httpResponse.responseData.data;
+    return httpResponse.responseData;
   };
 }
 
