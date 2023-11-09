@@ -1,6 +1,6 @@
 const RESTFULAPI = Object.freeze({
   dateValidation: '/api/dateValidation',
-  setWinningNumber: '/api/lotto/set/winningNumber',
+  orderMenuAndCount: '/api/orderMenuAndCount',
 });
 
 export default RESTFULAPI;

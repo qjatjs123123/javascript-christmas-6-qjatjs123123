@@ -1,7 +1,8 @@
 import HttpResponse from '../DTO/HttpResponse.js';
-import CONSTANTS from '../../Util/Constants.js';
+import { CONSTANTS } from '../../Util/Constants.js';
 import EventController from './EventController.js';
 import API from '../../Util/API.js';
+import { ERROR_MESSAGE } from '../../Util/Message.js';
 
 class RequestMapping {
   #eventController;
@@ -24,8 +25,11 @@ class RequestMapping {
       case API.dateValidation:
         return this.#eventController.checkDateInvalid(httpRequest.body);
 
+      case API.orderMenuAndCount:
+        return this.#eventController.handlerOrderMenuAndCount(httpRequest.body);
+
       default:
-        return console.log('qwe');
+        throw new Error(ERROR_MESSAGE.isNotAPI);
     }
   }
 }

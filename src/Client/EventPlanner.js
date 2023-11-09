@@ -3,7 +3,7 @@ import OutputView from '../OutputView.js';
 import InputView from '../InputView.js';
 import HttpRequest from './HttpRequest.js';
 import RequestMapping from '../Server/Controller/RequestMapping.js';
-import CONSTANTS from '../Util/Constants.js';
+import { CONSTANTS } from '../Util/Constants.js';
 import RESTFULAPI from '../Util/API.js';
 
 class EventPlanner {
@@ -19,7 +19,15 @@ class EventPlanner {
   }
 
   inputOrderMenuAndCount = async () => {
-    await InputView.readOrderMenuAndCount();
+    const menuAndCount = await InputView.readOrderMenuAndCount();
+    const responseData = await this.ajax(
+      RESTFULAPI.orderMenuAndCount,
+      {
+        userDTO: this.#userDTO,
+        menuAndCount,
+      },
+      this.inputOrderMenuAndCount,
+    );
   };
 
   inputExpectedVisitDate = async () => {

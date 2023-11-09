@@ -6,6 +6,10 @@ class EventController {
     userDTO.checkDateInvalid(expectedVisitDate);
     return userDTO;
   }
+
+  handlerOrderMenuAndCount({ userDTO, menuAndCount }) {
+    console.log(userDTO, menuAndCount);
+  }
 }
 
 export default EventController;

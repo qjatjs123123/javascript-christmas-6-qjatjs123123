@@ -1,5 +1,5 @@
 import { ERROR_MESSAGE } from '../../Util/Message.js';
-import CONSTANTS from '../../Util/Constants.js';
+import { CONSTANTS } from '../../Util/Constants.js';
 
 class UserDTO {
   #expectedVisitDate;
