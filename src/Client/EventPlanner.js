@@ -31,6 +31,7 @@ class EventPlanner {
     const httpRequest = new HttpRequest(url, data);
     const httpResponse = this.#server.requestAPI(httpRequest);
     if (httpResponse.status === CONSTANTS.error) {
+      OutputView.printError(httpResponse.responseData);
       return await callback();
     }
     return httpResponse.responseData;

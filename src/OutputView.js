@@ -10,6 +10,10 @@ const OutputView = {
   printMenu() {
     Console.print('<주문 메뉴>');
   },
+
+  printError(errorMessage) {
+    Console.print(errorMessage);
+  },
 };
 
 export default OutputView;
