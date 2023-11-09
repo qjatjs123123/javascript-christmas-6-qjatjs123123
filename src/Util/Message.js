@@ -7,8 +7,9 @@ const INPUT_MESSAGE = Object.freeze({
 });
 
 const ERROR_MESSAGE = Object.freeze({
-  isChar: '[ERROR] 문자를 입력하시면 안 됩니다.',
-  isBlank: '[ERROR] 공백를 입력하시면 안 됩니다.',
+  isChar: '[ERROR] 문자를 입력하시면 안 됩니다. 다시 입력해 주세요.',
+  isBlank: '[ERROR] 공백를 입력하시면 안 됩니다. 다시 입력해 주세요.',
+  isNotDateRange: '[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.',
 });
 
 export { OUTPUT_MESSAGE, INPUT_MESSAGE, ERROR_MESSAGE };
