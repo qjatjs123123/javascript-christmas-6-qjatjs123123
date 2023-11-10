@@ -4,39 +4,39 @@ import Validation from './Validation.js';
 class UserDTO {
   #expectedVisitDate;
   #orderMenu;
-  #christmasDiscount;
-  #weekdayDiscount;
-  #weekendDiscount;
-  #specialDiscount;
-  #freeGift;
+  #disCountHistory;
 
   constructor() {
     this.#orderMenu = {};
-    this.#christmasDiscount = CONSTANTS.noEventWord;
-    this.#weekdayDiscount = CONSTANTS.noEventWord;
-    this.#weekendDiscount = CONSTANTS.noEventWord;
-    this.#specialDiscount = CONSTANTS.noEventWord;
-    this.#freeGift = CONSTANTS.noEventWord;
+    this.#disCountHistory = [];
   }
 
   setFreeGift() {
-    this.#freeGift = CONSTANTS.freeGift;
+    const eventObject = {
+      eventName: CONSTANTS.freeGiftEventName,
+      discount: -CONSTANTS.freeGift.menuPrice,
+    };
+    this.#disCountHistory.push(eventObject);
   }
 
   setSpecialDiscount() {
-    this.#specialDiscount = -1000;
+    const eventObject = { eventName: CONSTANTS.specialEventName, discount: -1000 };
+    this.#disCountHistory.push(eventObject);
   }
 
   setWeekDayDiscount(discountTotal) {
-    this.#weekdayDiscount = discountTotal;
+    const eventObject = { eventName: CONSTANTS.weekdayEventName, discount: discountTotal };
+    this.#disCountHistory.push(eventObject);
   }
 
   setWeekEndDiscount(discountTotal) {
-    this.#weekendDiscount = discountTotal;
+    const eventObject = { eventName: CONSTANTS.weekendEventName, discount: discountTotal };
+    this.#disCountHistory.push(eventObject);
   }
 
   setChristmasDiscount(discount) {
-    this.#christmasDiscount = discount;
+    const eventObject = { eventName: CONSTANTS.christmasDdayEventName, discount };
+    this.#disCountHistory.push(eventObject);
   }
 
   setExpectedVisitDate(expectedVisitedDate) {
@@ -76,6 +76,10 @@ class UserDTO {
     return this.#expectedVisitDate;
   }
 
+  get disCountHistory() {
+    return this.#disCountHistory;
+  }
+
   getUserMenu() {
     let userMenu = [];
     const categorys = Object.keys(this.#orderMenu);
@@ -95,10 +99,6 @@ class UserDTO {
 
       return total + MENU[category].get(menuName) * menuCount;
     }, 0);
-  }
-
-  getchristmasDiscount() {
-    return this.#christmasDiscount;
   }
 }
 

@@ -18,6 +18,11 @@ const CONSTANTS = Object.freeze({
   weekdayDiscountCategory: 'dessert',
   weekendDiscountCategory: 'main',
   foodOnlyNotAllow: 'beverage',
+  christmasDdayEventName: '크리스마스 디데이 할인',
+  weekdayEventName: '평일 할인',
+  weekendEventName: '주말 할인',
+  specialEventName: '특별 할인',
+  freeGiftEventName: '증정 이벤트',
   weekdayDiscount: [0, 1, 2, 3, 4], // 일, 월, 화, 수, 목
   weekendDiscount: [5, 6], // 금, 토
   specialDiscount: [3, 10, 17, 24, 25, 31],
