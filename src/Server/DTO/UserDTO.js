@@ -7,11 +7,19 @@ class UserDTO {
   #christmasDiscount;
   #weekdayDiscount;
   #weekendDiscount;
+  #specialDiscount;
 
   constructor() {
     this.#orderMenu = {};
     this.#christmasDiscount = CONSTANTS.noEventWord;
     this.#weekdayDiscount = CONSTANTS.noEventWord;
+    this.#weekendDiscount = CONSTANTS.noEventWord;
+    this.#specialDiscount = CONSTANTS.noEventWord;
+  }
+
+  setSpecialDiscount() {
+    this.#specialDiscount = -1000;
+    console.log(this.#specialDiscount);
   }
 
   setWeekDayDiscount(category) {
@@ -32,7 +40,6 @@ class UserDTO {
       });
       this.#weekendDiscount = discountTotal;
     }
-    console.log(this.#weekendDiscount);
   }
 
   setChristmasDiscount(discount) {
