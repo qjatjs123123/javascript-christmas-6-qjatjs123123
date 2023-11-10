@@ -28,6 +28,7 @@ class EventPlanner {
       },
       this.inputOrderMenuAndCount,
     );
+    if (responseData) console.log(responseData.getOriginalOrderAmount());
   };
 
   inputExpectedVisitDate = async () => {

@@ -49,5 +49,4 @@ class Calendar {
   }
 }
 
-const c = new Calendar();
-console.log(c.isSpecialEvent(10));
+export default Calendar;

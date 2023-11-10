@@ -21,7 +21,7 @@ class UserDTO {
     orderMenus.forEach((orderMenu) => {
       const [menuName, menuCount] = orderMenu.split(CONSTANTS.countSplitChar);
       const category = MENUFUNC.getCategory(menuName);
-      const menuObject = { menuName, menuCount };
+      const menuObject = { menuName, menuCount: Number(menuCount) };
 
       this.#orderMenu[category] = this.#orderMenu[category] ?? [];
       this.#orderMenu[category].push(menuObject);
@@ -77,6 +77,17 @@ class UserDTO {
 
   get expectedVisitDate() {
     return this.#expectedVisitDate;
+  }
+
+  getUserMenu() {
+    let userMenu = [];
+    const categorys = Object.keys(this.#orderMenu);
+
+    categorys.forEach((category) => {
+      userMenu = [...userMenu, ...this.#orderMenu[category]];
+    });
+
+    return userMenu;
   }
 }
 

@@ -9,6 +9,7 @@ class EventController {
 
   handlerOrderMenuAndCount({ userDTO, menuAndCount }) {
     userDTO.setOrderMenu(menuAndCount);
+    return userDTO;
   }
 }
 
