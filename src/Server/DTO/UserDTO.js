@@ -100,6 +100,12 @@ class UserDTO {
       return total + MENU[category].get(menuName) * menuCount;
     }, 0);
   }
+
+  getAllDiscountAmount() {
+    return this.#disCountHistory.reduce((benefit, { discount }) => {
+      return benefit + discount;
+    }, 0);
+  }
 }
 
 export default UserDTO;
