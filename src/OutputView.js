@@ -15,6 +15,12 @@ const OutputView = {
     });
   },
 
+  printAllDiscountAmount(allDiscountAmount) {
+    Console.print(OUTPUT_MESSAGE.allDiscountAmountTitle);
+    Console.print(OUTPUT_MESSAGE.allDiscountAmount(allDiscountAmount));
+  },
+
+  // eslint-disable-next-line consistent-return
   printDiscountHistory(discountHistory) {
     Console.print(OUTPUT_MESSAGE.discountHistoryMessage);
     if (discountHistory === CONSTANTS.noEventWord) return Console.print(OUTPUT_MESSAGE.noEventWord);

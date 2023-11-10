@@ -13,6 +13,8 @@ const OUTPUT_MESSAGE = Object.freeze({
   discountHistoryMessage: '\n<혜택 내역>',
   discountHistory: (eventName, discount) => `${eventName}: ${discount.toLocaleString()}원`,
   noEventWord: `${CONSTANTS.noEventWord}`,
+  allDiscountAmountTitle: '\n<총혜택 금액>',
+  allDiscountAmount: (allDiscountAmount) => `${allDiscountAmount.toLocaleString()}원`,
 });
 
 const INPUT_MESSAGE = Object.freeze({
