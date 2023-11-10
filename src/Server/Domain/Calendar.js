@@ -19,10 +19,20 @@ class Calendar {
     return false;
   }
 
+  isWeekDayEvent(visitDay) {
+    const visitDate = this.#getDate(visitDay);
+    const eventStartDay = this.#getDate(CONSTANTS.eventStartDay);
+    const eventEndDay = this.#getDate(CONSTANTS.eventEndDay);
+
+    if (eventStartDay > visitDate && eventEndDay < visitDate) return false;
+    if (!CONSTANTS.weekdayDiscount.includes(visitDate.getDay())) return false;
+    return true;
+  }
+
   #getDate(day) {
     return new Date(`${CONSTANTS.eventYear}-${CONSTANTS.eventMonth}-${day}`);
   }
 }
 
 const c = new Calendar();
-console.log(c.isChristmasDdayEvent(0));
+console.log(c.isWeekDayEvent(29));

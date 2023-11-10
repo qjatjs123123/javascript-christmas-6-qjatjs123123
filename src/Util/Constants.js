@@ -11,6 +11,8 @@ const CONSTANTS = Object.freeze({
   countSplitChar: '-',
   orderLimitCount: 20,
   foodOnlyNotAllow: 'beverage',
+  weekdayDiscount: [0, 1, 2, 3, 4], // 일, 월, 화, 수, 목
+  weekendDiscount: [5, 6], // 금, 토
 });
 
 const MENU = Object.freeze({
