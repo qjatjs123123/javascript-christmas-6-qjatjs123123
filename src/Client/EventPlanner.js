@@ -44,6 +44,7 @@ class EventPlanner {
   requestResultDiscountInfo = async () => {
     const responseData = await this.ajax(RESTFULAPI.getResultDiscountInfo, this.#userDTO, null);
     OutputView.printEventPreviewMessage(responseData.expectedVisitDate);
+    OutputView.printMenu(responseData.getUserMenu());
   };
 
   ajax = async (url, data, callback) => {

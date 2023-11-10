@@ -7,8 +7,11 @@ const OutputView = {
     Console.print(OUTPUT_MESSAGE.welcomeMessage);
   },
 
-  printMenu() {
-    Console.print('<주문 메뉴>');
+  printMenu(userMenu) {
+    Console.print(OUTPUT_MESSAGE.orderMenuTitleMessage);
+    userMenu.forEach(({ menuName, menuCount }) => {
+      Console.print(OUTPUT_MESSAGE.orderMenuMessage(menuName, menuCount));
+    });
   },
 
   printError(errorMessage) {

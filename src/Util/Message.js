@@ -4,6 +4,8 @@ import { CONSTANTS } from './Constants.js';
 const OUTPUT_MESSAGE = Object.freeze({
   welcomeMessage: '안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.',
   eventPreviewMessage: (visitDay) => `${CONSTANTS.eventMonth}월 ${visitDay}일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n`,
+  orderMenuTitleMessage: '<주문 메뉴>',
+  orderMenuMessage: (menuName, menuCount) => `${menuName} ${menuCount}개`,
 });
 
 const INPUT_MESSAGE = Object.freeze({
