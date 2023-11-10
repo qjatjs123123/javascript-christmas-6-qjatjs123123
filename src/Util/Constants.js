@@ -1,6 +1,7 @@
 const CONSTANTS = Object.freeze({
   error: '[ERROR]',
   success: '[SUCCESS]',
+  noEventWord: '없음',
   eventYear: 2023,
   eventMonth: 12,
   eventStartDay: 1,

@@ -4,9 +4,14 @@ import { CONSTANTS, MENU, MENUFUNC } from '../../Util/Constants.js';
 class UserDTO {
   #expectedVisitDate;
   #orderMenu;
+  #christmasDiscount;
 
   constructor() {
     this.#orderMenu = {};
+    this.#christmasDiscount = CONSTANTS.noEventWord;
+  }
+  setChristmasDiscount(discount) {
+    this.#christmasDiscount = discount;
   }
 
   setExpectedVisitDate(expectedVisitedDate) {
@@ -98,6 +103,10 @@ class UserDTO {
 
       return total + MENU[category].get(menuName) * menuCount;
     }, 0);
+  }
+
+  getchristmasDiscount() {
+    return this.#christmasDiscount;
   }
 }
 
