@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import { Console } from '@woowacourse/mission-utils';
 import { OUTPUT_MESSAGE } from './Util/Message.js';
+import { CONSTANTS } from './Util/Constants.js';
 
 const OutputView = {
   printWelcomeMessage() {
@@ -17,6 +18,13 @@ const OutputView = {
   printOriginalOrderAmount(originalOrderAmount) {
     Console.print(OUTPUT_MESSAGE.originalOrderAmountTitleMessage);
     Console.print(OUTPUT_MESSAGE.originalOrderAmountMessage(originalOrderAmount));
+  },
+
+  printFreeGift(freeGift) {
+    let message = freeGift;
+    if (freeGift !== CONSTANTS.noEventWord) message = `${freeGift.menuName} ${freeGift.count}개`;
+    Console.print(OUTPUT_MESSAGE.freeGiftTitleMessage);
+    Console.print(OUTPUT_MESSAGE.freeGiftMessage(message));
   },
 
   printError(errorMessage) {

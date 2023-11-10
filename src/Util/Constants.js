@@ -12,7 +12,7 @@ const CONSTANTS = Object.freeze({
   countSplitChar: '-',
   orderLimitCount: 20,
   discountAmount: 2023,
-  freeGift: Object.freeze({ menuName: '샴페인', menuPrice: 25000 }),
+  freeGift: Object.freeze({ menuName: '샴페인', menuPrice: 25000, count: 1 }),
   freeGiftLimitAmount: 120000,
   eventLimitAmount: 10000,
   santaBadge: { badgeName: '산타', limitAmount: 20000 },

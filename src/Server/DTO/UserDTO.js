@@ -116,6 +116,14 @@ class UserDTO {
       return benefit + discount;
     }, 0);
   }
+
+  getFreeGift() {
+    const isFreeGift = this.#disCountHistory.some(
+      (userEvent) => userEvent.eventName === CONSTANTS.freeGiftEventName,
+    );
+    if (isFreeGift) return CONSTANTS.freeGift;
+    return CONSTANTS.noEventWord;
+  }
 }
 
 export default UserDTO;

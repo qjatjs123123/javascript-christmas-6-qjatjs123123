@@ -8,6 +8,8 @@ const OUTPUT_MESSAGE = Object.freeze({
   orderMenuMessage: (menuName, menuCount) => `${menuName} ${menuCount}개`,
   originalOrderAmountTitleMessage: '\n<할인 전 총주문 금액>',
   originalOrderAmountMessage: (originalOrderAmount) => `${originalOrderAmount.toLocaleString()}원`,
+  freeGiftTitleMessage: '\n<증정 메뉴>',
+  freeGiftMessage: (message) => `${message}`,
 });
 
 const INPUT_MESSAGE = Object.freeze({
