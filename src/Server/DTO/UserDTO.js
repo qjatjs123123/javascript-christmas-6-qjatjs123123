@@ -6,6 +6,7 @@ class UserDTO {
   #orderMenu;
   #christmasDiscount;
   #weekdayDiscount;
+  #weekendDiscount;
 
   constructor() {
     this.#orderMenu = {};
@@ -21,6 +22,17 @@ class UserDTO {
       });
       this.#weekdayDiscount = discountTotal;
     }
+  }
+
+  setWeekEndDiscount(category) {
+    if (category in this.#orderMenu) {
+      let discountTotal = 0;
+      this.#orderMenu[category].forEach((ordermenu) => {
+        discountTotal += -CONSTANTS.discountAmount * ordermenu.menuCount;
+      });
+      this.#weekendDiscount = discountTotal;
+    }
+    console.log(this.#weekendDiscount);
   }
 
   setChristmasDiscount(discount) {
