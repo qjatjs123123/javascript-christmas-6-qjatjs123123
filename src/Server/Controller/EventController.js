@@ -5,6 +5,7 @@ import WeekdayDiscount from '../Domain/WeekdayDiscount.js';
 import WeekendDiscount from '../Domain/WeekendDiscount.js';
 import SpecialDiscount from '../Domain/SpecialDiscount.js';
 import FreeGiftEvent from '../Domain/FreeGiftEvent.js';
+import EventBadge from '../Domain/EventBadge.js';
 import { CONSTANTS } from '../../Util/Constants.js';
 
 class EventController {
@@ -14,6 +15,7 @@ class EventController {
   #weekend;
   #special;
   #freeGift;
+  #eventBadge;
 
   constructor() {
     this.#calendar = new Calendar();
@@ -22,6 +24,7 @@ class EventController {
     this.#weekend = new WeekendDiscount();
     this.#special = new SpecialDiscount();
     this.#freeGift = new FreeGiftEvent();
+    this.#eventBadge = new EventBadge();
   }
 
   checkDateInvalid(expectedVisitDate) {
@@ -37,7 +40,7 @@ class EventController {
 
   handlerDiscountEvent(userDTO) {
     const visitDay = userDTO.expectedVisitDate;
-    if (this.#isUnderEventLimitAmount(userDTO)) return;
+    if (this.#isUnderEventLimitAmount(userDTO)) return userDTO;
 
     if (this.#calendar.isChristmasDdayEvent(visitDay)) this.#christmasDday.discount(userDTO);
     if (this.#calendar.isWeekDayEvent(visitDay)) this.#weekday.discount(userDTO);
@@ -45,6 +48,8 @@ class EventController {
     if (this.#calendar.isSpecialEvent(visitDay)) this.#special.discount(userDTO);
 
     this.#freeGift.isFreeGift(userDTO);
+    this.#eventBadge.getEventBadge(userDTO);
+    return userDTO;
   }
 
   #isUnderEventLimitAmount(userDTO) {

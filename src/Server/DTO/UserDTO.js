@@ -5,10 +5,16 @@ class UserDTO {
   #expectedVisitDate;
   #orderMenu;
   #disCountHistory;
+  #eventBadge;
 
   constructor() {
     this.#orderMenu = {};
     this.#disCountHistory = [];
+    this.#eventBadge = CONSTANTS.noEventWord;
+  }
+
+  setEventBadge(badge) {
+    this.#eventBadge = badge;
   }
 
   setFreeGift() {
@@ -78,6 +84,10 @@ class UserDTO {
 
   get disCountHistory() {
     return this.#disCountHistory;
+  }
+
+  get eventBadge() {
+    return this.#eventBadge;
   }
 
   getUserMenu() {

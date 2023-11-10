@@ -14,6 +14,10 @@ const OutputView = {
   printError(errorMessage) {
     Console.print(errorMessage);
   },
+
+  printEventPreviewMessage(visitDay) {
+    Console.print(OUTPUT_MESSAGE.eventPreviewMessage(visitDay));
+  },
 };
 
 export default OutputView;
