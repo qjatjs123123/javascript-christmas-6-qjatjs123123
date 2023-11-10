@@ -6,6 +6,7 @@ const CONSTANTS = Object.freeze({
   menuSplitChar: ',',
   countSplitChar: '-',
   orderLimitCount: 20,
+  foodOnlyNotAllow: 'beverage',
 });
 
 const MENU = Object.freeze({

@@ -23,6 +23,7 @@ class UserDTO {
       this.#checkOrderMenuIsExist(orderMenu);
     });
     this.#checkOrderMenuIsDuplicate(orderMenus);
+    this.#checkOrderMenuIsAllBeverage(orderMenus);
   }
 
   #checkOrderMenuIsFormat(orderMenu) {
@@ -47,7 +48,16 @@ class UserDTO {
     );
     const orderMenuNameSet = new Set(orderMenuNameList);
 
-    return orderMenuNameList.length === orderMenuNameSet.size;
+    if (orderMenuNameList.length !== orderMenuNameSet.size)
+      throw new Error(ERROR_MESSAGE.isDuplicate);
+  }
+
+  #checkOrderMenuIsAllBeverage(orderMenus) {
+    const orderMenuNameList = orderMenus
+      .map((orderMenu) => orderMenu.split(CONSTANTS.countSplitChar)[0])
+      .every((menuName) => MENU[CONSTANTS.foodOnlyNotAllow].has(menuName));
+
+    if (orderMenuNameList) throw new Error(ERROR_MESSAGE.isAllBeverage);
   }
 
   get expectedVisitDate() {
