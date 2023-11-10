@@ -15,6 +15,11 @@ const OutputView = {
     });
   },
 
+  printPaymentTotal(paymentTotal) {
+    Console.print(OUTPUT_MESSAGE.paymentTotalTitle);
+    Console.print(OUTPUT_MESSAGE.paymentTotal(paymentTotal));
+  },
+
   printAllDiscountAmount(allDiscountAmount) {
     Console.print(OUTPUT_MESSAGE.allDiscountAmountTitle);
     Console.print(OUTPUT_MESSAGE.allDiscountAmount(allDiscountAmount));

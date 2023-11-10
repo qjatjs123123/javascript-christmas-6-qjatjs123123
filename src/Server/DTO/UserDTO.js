@@ -129,6 +129,15 @@ class UserDTO {
     if (this.#disCountHistory.length === 0) return CONSTANTS.noEventWord;
     return this.#disCountHistory;
   }
+
+  getPaymentTotal() {
+    let allDiscountAmount = this.getAllDiscountAmount();
+
+    if (this.getFreeGift() !== CONSTANTS.noEventWord)
+      allDiscountAmount += CONSTANTS.freeGift.menuPrice;
+
+    return this.getOriginalOrderAmount() + allDiscountAmount;
+  }
 }
 
 export default UserDTO;

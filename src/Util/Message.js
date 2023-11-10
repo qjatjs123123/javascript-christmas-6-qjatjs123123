@@ -15,6 +15,8 @@ const OUTPUT_MESSAGE = Object.freeze({
   noEventWord: `${CONSTANTS.noEventWord}`,
   allDiscountAmountTitle: '\n<총혜택 금액>',
   allDiscountAmount: (allDiscountAmount) => `${allDiscountAmount.toLocaleString()}원`,
+  paymentTotalTitle: '\n<할인 후 예상 결제 금액>',
+  paymentTotal: (paymentTotal) => `${paymentTotal.toLocaleString()}원`,
 });
 
 const INPUT_MESSAGE = Object.freeze({
