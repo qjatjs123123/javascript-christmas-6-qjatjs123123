@@ -6,6 +6,8 @@ const OUTPUT_MESSAGE = Object.freeze({
   eventPreviewMessage: (visitDay) => `${CONSTANTS.eventMonth}월 ${visitDay}일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n`,
   orderMenuTitleMessage: '<주문 메뉴>',
   orderMenuMessage: (menuName, menuCount) => `${menuName} ${menuCount}개`,
+  originalOrderAmountTitleMessage: '\n<할인 전 총주문 금액>',
+  originalOrderAmountMessage: (originalOrderAmount) => `${originalOrderAmount.toLocaleString()}원`,
 });
 
 const INPUT_MESSAGE = Object.freeze({

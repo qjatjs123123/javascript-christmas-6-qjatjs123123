@@ -14,6 +14,11 @@ const OutputView = {
     });
   },
 
+  printOriginalOrderAmount(originalOrderAmount) {
+    Console.print(OUTPUT_MESSAGE.originalOrderAmountTitleMessage);
+    Console.print(OUTPUT_MESSAGE.originalOrderAmountMessage(originalOrderAmount));
+  },
+
   printError(errorMessage) {
     Console.print(errorMessage);
   },
