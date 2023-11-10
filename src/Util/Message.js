@@ -27,14 +27,14 @@ const INPUT_MESSAGE = Object.freeze({
 });
 
 const ERROR_MESSAGE = Object.freeze({
-  isChar: '[ERROR] 문자를 입력하시면 안 됩니다. 다시 입력해 주세요.',
-  isBlank: '[ERROR] 공백를 입력하시면 안 됩니다. 다시 입력해 주세요.',
+  isChar: '[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.',
+  isBlank: '[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.',
   isNotDateRange: '[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.',
   isNotAPI: '[ERROR] 유효하지 않은 URL 입니다. 다시 입력해 주세요',
   isNotOrderMenuFormat: '[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.',
   isDuplicate: '[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.',
-  isAllBeverage: '[ERROR] 음료만 주문 시, 주문할 수 없습니다.',
-  isNotLength: '[ERROR] 메뉴는 최대 20개 까지 가능합니다. 다시 입력해 주세요.'
+  isAllBeverage: '[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.',
+  isNotLength: '[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.'
 });
 
 export { OUTPUT_MESSAGE, INPUT_MESSAGE, ERROR_MESSAGE };
