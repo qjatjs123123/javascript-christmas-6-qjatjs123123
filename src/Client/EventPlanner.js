@@ -47,6 +47,7 @@ class EventPlanner {
     OutputView.printMenu(responseData.getUserMenu());
     OutputView.printOriginalOrderAmount(responseData.getOriginalOrderAmount());
     OutputView.printFreeGift(responseData.getFreeGift());
+    OutputView.printDiscountHistory(responseData.getDisCountHistory());
   };
 
   ajax = async (url, data, callback) => {

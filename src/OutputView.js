@@ -15,6 +15,15 @@ const OutputView = {
     });
   },
 
+  printDiscountHistory(discountHistory) {
+    Console.print(OUTPUT_MESSAGE.discountHistoryMessage);
+    if (discountHistory === CONSTANTS.noEventWord) return Console.print(OUTPUT_MESSAGE.noEventWord);
+
+    discountHistory.forEach(({ eventName, discount }) => {
+      Console.print(OUTPUT_MESSAGE.discountHistory(eventName, discount));
+    });
+  },
+
   printOriginalOrderAmount(originalOrderAmount) {
     Console.print(OUTPUT_MESSAGE.originalOrderAmountTitleMessage);
     Console.print(OUTPUT_MESSAGE.originalOrderAmountMessage(originalOrderAmount));

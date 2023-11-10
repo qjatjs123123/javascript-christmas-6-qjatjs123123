@@ -35,7 +35,7 @@ const MENU = Object.freeze({
   appetizer: Object.freeze(
     new Map([
       ['양송이수프', 6000],
-      ['타파스', 5000],
+      ['타파스', 5500],
       ['시저샐러드', 8000],
     ]),
   ),

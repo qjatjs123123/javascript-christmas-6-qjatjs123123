@@ -124,6 +124,11 @@ class UserDTO {
     if (isFreeGift) return CONSTANTS.freeGift;
     return CONSTANTS.noEventWord;
   }
+
+  getDisCountHistory() {
+    if (this.#disCountHistory.length === 0) return CONSTANTS.noEventWord;
+    return this.#disCountHistory;
+  }
 }
 
 export default UserDTO;

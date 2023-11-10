@@ -10,6 +10,9 @@ const OUTPUT_MESSAGE = Object.freeze({
   originalOrderAmountMessage: (originalOrderAmount) => `${originalOrderAmount.toLocaleString()}원`,
   freeGiftTitleMessage: '\n<증정 메뉴>',
   freeGiftMessage: (message) => `${message}`,
+  discountHistoryMessage: '\n<혜택 내역>',
+  discountHistory: (eventName, discount) => `${eventName}: ${discount.toLocaleString()}원`,
+  noEventWord: `${CONSTANTS.noEventWord}`,
 });
 
 const INPUT_MESSAGE = Object.freeze({
