@@ -8,6 +8,7 @@ class UserDTO {
   #weekdayDiscount;
   #weekendDiscount;
   #specialDiscount;
+  #freeGift;
 
   constructor() {
     this.#orderMenu = {};
@@ -15,6 +16,11 @@ class UserDTO {
     this.#weekdayDiscount = CONSTANTS.noEventWord;
     this.#weekendDiscount = CONSTANTS.noEventWord;
     this.#specialDiscount = CONSTANTS.noEventWord;
+    this.#freeGift = CONSTANTS.noEventWord;
+  }
+
+  setFreeGift() {
+    this.#freeGift = CONSTANTS.freeGift;
   }
 
   setSpecialDiscount() {
@@ -23,7 +29,6 @@ class UserDTO {
 
   setWeekDayDiscount(discountTotal) {
     this.#weekdayDiscount = discountTotal;
-    console.log(this.#weekdayDiscount);
   }
 
   setWeekEndDiscount(discountTotal) {

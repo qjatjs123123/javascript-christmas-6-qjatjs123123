@@ -4,6 +4,8 @@ import ChristmasDdayDiscount from '../Domain/ChristmasDdayDiscount.js';
 import WeekdayDiscount from '../Domain/WeekdayDiscount.js';
 import WeekendDiscount from '../Domain/WeekendDiscount.js';
 import SpecialDiscount from '../Domain/SpecialDiscount.js';
+import FreeGiftEvent from '../Domain/FreeGiftEvent.js';
+import { CONSTANTS } from '../../Util/Constants.js';
 
 class EventController {
   #calendar;
@@ -11,6 +13,7 @@ class EventController {
   #weekday;
   #weekend;
   #special;
+  #freeGift;
 
   constructor() {
     this.#calendar = new Calendar();
@@ -18,6 +21,7 @@ class EventController {
     this.#weekday = new WeekdayDiscount();
     this.#weekend = new WeekendDiscount();
     this.#special = new SpecialDiscount();
+    this.#freeGift = new FreeGiftEvent();
   }
 
   checkDateInvalid(expectedVisitDate) {
@@ -33,11 +37,19 @@ class EventController {
 
   handlerDiscountEvent(userDTO) {
     const visitDay = userDTO.expectedVisitDate;
+    if (this.#isUnderEventLimitAmount(userDTO)) return;
 
     if (this.#calendar.isChristmasDdayEvent(visitDay)) this.#christmasDday.discount(userDTO);
     if (this.#calendar.isWeekDayEvent(visitDay)) this.#weekday.discount(userDTO);
     if (this.#calendar.isWeekEndEvent(visitDay)) this.#weekend.discount(userDTO);
     if (this.#calendar.isSpecialEvent(visitDay)) this.#special.discount(userDTO);
+
+    this.#freeGift.isFreeGift(userDTO);
+  }
+
+  #isUnderEventLimitAmount(userDTO) {
+    if (userDTO.getOriginalOrderAmount() < CONSTANTS.eventLimitAmount) return true;
+    return false;
   }
 }
 
