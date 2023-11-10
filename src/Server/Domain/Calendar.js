@@ -39,10 +39,15 @@ class Calendar {
     return true;
   }
 
+  isSpecialEvent(visitDay) {
+    if (CONSTANTS.specialDiscount.includes(visitDay)) return true;
+    return false;
+  }
+
   #getDate(day) {
     return new Date(`${CONSTANTS.eventYear}-${CONSTANTS.eventMonth}-${day}`);
   }
 }
 
 const c = new Calendar();
-console.log(c.isWeekEndEvent(28));
+console.log(c.isSpecialEvent(10));

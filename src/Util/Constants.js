@@ -13,6 +13,7 @@ const CONSTANTS = Object.freeze({
   foodOnlyNotAllow: 'beverage',
   weekdayDiscount: [0, 1, 2, 3, 4], // 일, 월, 화, 수, 목
   weekendDiscount: [5, 6], // 금, 토
+  specialDiscount: [3, 10, 17, 24, 25, 31],
 });
 
 const MENU = Object.freeze({
