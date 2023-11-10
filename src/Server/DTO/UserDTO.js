@@ -18,26 +18,36 @@ class UserDTO {
 
   checkMenuAndCountInvalid(menuAndCount) {
     const orderMenus = menuAndCount.split(CONSTANTS.menuSplitChar);
-    this.#checkOrderMenuFormatInvalid(orderMenus);
-  }
-
-  #checkOrderMenuFormatInvalid(orderMenus) {
-    const regex = /.+-[1-9]\d*/;
     orderMenus.forEach((orderMenu) => {
-      if (!regex.test(orderMenu)) throw new Error(ERROR_MESSAGE.isNotOrderMenuFormat);
+      this.#checkOrderMenuIsFormat(orderMenu);
       this.#checkOrderMenuIsExist(orderMenu);
     });
+    this.#checkOrderMenuIsDuplicate(orderMenus);
+  }
+
+  #checkOrderMenuIsFormat(orderMenu) {
+    const regex = /.+-[1-9]\d*/;
+    if (!regex.test(orderMenu)) throw new Error(ERROR_MESSAGE.isNotOrderMenuFormat);
   }
 
   #checkOrderMenuIsExist(orderMenu) {
-    const eventMenus = Object.keys(MENU);
+    const menuCategoryList = Object.keys(MENU);
     let isExist = false;
-    eventMenus.forEach((eventMenu) => {
+    menuCategoryList.forEach((menuCategory) => {
       const menuName = orderMenu.split(CONSTANTS.countSplitChar)[0];
-      const eventMenuList = MENU[eventMenu];
+      const eventMenuList = MENU[menuCategory];
       if (eventMenuList.has(menuName)) isExist = true;
     });
     if (!isExist) throw new Error(ERROR_MESSAGE.isNotOrderMenuFormat);
+  }
+
+  #checkOrderMenuIsDuplicate(orderMenus) {
+    const orderMenuNameList = orderMenus.map(
+      (orderMenu) => orderMenu.split(CONSTANTS.countSplitChar)[0],
+    );
+    const orderMenuNameSet = new Set(orderMenuNameList);
+
+    return orderMenuNameList.length === orderMenuNameSet.size;
   }
 
   get expectedVisitDate() {
