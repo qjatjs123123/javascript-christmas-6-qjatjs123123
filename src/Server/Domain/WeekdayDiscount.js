@@ -11,7 +11,16 @@ class WeekdayDiscount {
   }
 
   discount(userDTO) {
-    userDTO.setWeekDayDiscount(CONSTANTS.weekdayDiscountCategory);
+    const userMenu = userDTO.orderMenu;
+    const category = CONSTANTS.weekdayDiscountCategory;
+
+    if (category in userMenu) {
+      let discountTotal = 0;
+      userMenu[category].forEach((ordermenu) => {
+        discountTotal += -CONSTANTS.discountAmount * ordermenu.menuCount;
+      });
+      userDTO.setWeekDayDiscount(discountTotal);
+    }
   }
 }
 

@@ -19,27 +19,15 @@ class UserDTO {
 
   setSpecialDiscount() {
     this.#specialDiscount = -1000;
-    console.log(this.#specialDiscount);
   }
 
-  setWeekDayDiscount(category) {
-    if (category in this.#orderMenu) {
-      let discountTotal = 0;
-      this.#orderMenu[category].forEach((ordermenu) => {
-        discountTotal += -CONSTANTS.discountAmount * ordermenu.menuCount;
-      });
-      this.#weekdayDiscount = discountTotal;
-    }
+  setWeekDayDiscount(discountTotal) {
+    this.#weekdayDiscount = discountTotal;
+    console.log(this.#weekdayDiscount);
   }
 
-  setWeekEndDiscount(category) {
-    if (category in this.#orderMenu) {
-      let discountTotal = 0;
-      this.#orderMenu[category].forEach((ordermenu) => {
-        discountTotal += -CONSTANTS.discountAmount * ordermenu.menuCount;
-      });
-      this.#weekendDiscount = discountTotal;
-    }
+  setWeekEndDiscount(discountTotal) {
+    this.#weekendDiscount = discountTotal;
   }
 
   setChristmasDiscount(discount) {
@@ -110,6 +98,10 @@ class UserDTO {
       .every((menuName) => MENU[CONSTANTS.foodOnlyNotAllow].has(menuName));
 
     if (orderMenuNameList) throw new Error(ERROR_MESSAGE.isAllBeverage);
+  }
+
+  get orderMenu() {
+    return this.#orderMenu;
   }
 
   get expectedVisitDate() {
