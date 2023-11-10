@@ -89,6 +89,16 @@ class UserDTO {
 
     return userMenu;
   }
+
+  getOriginalOrderAmount() {
+    const userMenu = this.getUserMenu();
+
+    return userMenu.reduce((total, { menuName, menuCount }) => {
+      const category = MENUFUNC.getCategory(menuName);
+
+      return total + MENU[category].get(menuName) * menuCount;
+    }, 0);
+  }
 }
 
 export default UserDTO;
