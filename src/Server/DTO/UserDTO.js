@@ -5,11 +5,24 @@ class UserDTO {
   #expectedVisitDate;
   #orderMenu;
   #christmasDiscount;
+  #weekdayDiscount;
 
   constructor() {
     this.#orderMenu = {};
     this.#christmasDiscount = CONSTANTS.noEventWord;
+    this.#weekdayDiscount = CONSTANTS.noEventWord;
   }
+
+  setWeekDayDiscount(category) {
+    if (category in this.#orderMenu) {
+      let discountTotal = 0;
+      this.#orderMenu[category].forEach((ordermenu) => {
+        discountTotal += -CONSTANTS.discountAmount * ordermenu.menuCount;
+      });
+      this.#weekdayDiscount = discountTotal;
+    }
+  }
+
   setChristmasDiscount(discount) {
     this.#christmasDiscount = discount;
   }
