@@ -28,7 +28,7 @@ class EventPlanner {
       },
       this.inputOrderMenuAndCount,
     );
-    if (responseData) console.log(responseData.getOriginalOrderAmount());
+    if (responseData) this.#userDTO = responseData;
   };
 
   inputExpectedVisitDate = async () => {
@@ -39,6 +39,10 @@ class EventPlanner {
       this.inputExpectedVisitDate,
     );
     if (responseData) this.#userDTO = responseData;
+  };
+
+  requestResultDiscountInfo = async () => {
+    const responseData = await this.ajax(RESTFULAPI.getResultDiscountInfo, this.#userDTO, null);
   };
 
   ajax = async (url, data, callback) => {

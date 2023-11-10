@@ -11,6 +11,10 @@ class EventController {
     userDTO.setOrderMenu(menuAndCount);
     return userDTO;
   }
+
+  handlerDiscountEvent(userDTO) {
+    console.log(userDTO);
+  }
 }
 
 export default EventController;

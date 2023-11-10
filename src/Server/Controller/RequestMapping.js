@@ -28,6 +28,9 @@ class RequestMapping {
       case API.orderMenuAndCount:
         return this.#eventController.handlerOrderMenuAndCount(httpRequest.body);
 
+      case API.getResultDiscountInfo:
+        return this.#eventController.handlerDiscountEvent(httpRequest.body);
+
       default:
         throw new Error(ERROR_MESSAGE.isNotAPI);
     }

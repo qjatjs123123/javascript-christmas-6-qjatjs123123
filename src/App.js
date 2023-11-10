@@ -11,6 +11,7 @@ class App {
     this.#EventPlanner.printWelcomeMessage();
     await this.#EventPlanner.inputExpectedVisitDate();
     await this.#EventPlanner.inputOrderMenuAndCount();
+    await this.#EventPlanner.requestResultDiscountInfo();
   }
 }
 
