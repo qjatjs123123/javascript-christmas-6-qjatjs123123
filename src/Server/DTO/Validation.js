@@ -39,6 +39,14 @@ class Validation {
 
     if (orderMenuNameList) throw new Error(ERROR_MESSAGE.isAllBeverage);
   }
+
+  static checkOrderMenuIsLength(orderMenus) {
+    const menuCount = orderMenus.reduce((count, orderMenu) => {
+      return count + Number(orderMenu.split(CONSTANTS.countSplitChar)[1]);
+    }, 0);
+
+    if (menuCount > CONSTANTS.orderLimitCount) throw new Error(ERROR_MESSAGE.isNotLength);
+  }
 }
 
 export default Validation;

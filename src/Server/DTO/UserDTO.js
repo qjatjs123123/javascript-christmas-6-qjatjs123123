@@ -65,6 +65,7 @@ class UserDTO {
     });
     Validation.checkOrderMenuIsDuplicate(orderMenus);
     Validation.checkOrderMenuIsAllBeverage(orderMenus);
+    Validation.checkOrderMenuIsLength(orderMenus);
   }
 
   get orderMenu() {
