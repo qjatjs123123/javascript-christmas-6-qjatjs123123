@@ -39,4 +39,14 @@ const MENU = Object.freeze({
     ]),
   ),
 });
-export { CONSTANTS, MENU };
+
+const MENUFUNC = {
+  getCategory(menuName) {
+    const menuCategoryList = Object.keys(MENU);
+    const category = menuCategoryList.filter((menuCategory) => MENU[menuCategory].has(menuName));
+    if (category.length !== 0) return category[0];
+    return false;
+  },
+};
+
+export { CONSTANTS, MENU, MENUFUNC };

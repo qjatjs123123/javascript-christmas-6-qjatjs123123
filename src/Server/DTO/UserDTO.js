@@ -1,23 +1,43 @@
 import { ERROR_MESSAGE } from '../../Util/Message.js';
-import { CONSTANTS, MENU } from '../../Util/Constants.js';
+import { CONSTANTS, MENU, MENUFUNC } from '../../Util/Constants.js';
 
 class UserDTO {
   #expectedVisitDate;
-  #menu;
+  #orderMenu;
 
-  checkDateInvalid(expectedVisitedDate) {
+  constructor() {
+    this.#orderMenu = {};
+  }
+
+  setExpectedVisitDate(expectedVisitedDate) {
+    this.#checkDateInvalid(expectedVisitedDate);
+    this.#expectedVisitDate = Number(expectedVisitedDate);
+  }
+
+  setOrderMenu(menuAndCount) {
+    const orderMenus = menuAndCount.split(CONSTANTS.menuSplitChar);
+    this.#checkOrderMenuInvalid(orderMenus);
+
+    orderMenus.forEach((orderMenu) => {
+      const [menuName, menuCount] = orderMenu.split(CONSTANTS.countSplitChar);
+      const category = MENUFUNC.getCategory(menuName);
+      const menuObject = { menuName, menuCount };
+
+      this.#orderMenu[category] = this.#orderMenu[category] ?? [];
+      this.#orderMenu[category].push(menuObject);
+    });
+  }
+
+  #checkDateInvalid(expectedVisitedDate) {
     if (expectedVisitedDate === '') throw new Error(ERROR_MESSAGE.isBlank);
 
     const date = Number(expectedVisitedDate);
     if (Number.isNaN(date)) throw new Error(ERROR_MESSAGE.isChar);
     if (date < CONSTANTS.eventStartDate || date > CONSTANTS.eventEndDate)
       throw new Error(ERROR_MESSAGE.isNotDateRange);
-
-    this.#expectedVisitDate = date;
   }
 
-  checkMenuAndCountInvalid(menuAndCount) {
-    const orderMenus = menuAndCount.split(CONSTANTS.menuSplitChar);
+  #checkOrderMenuInvalid(orderMenus) {
     orderMenus.forEach((orderMenu) => {
       this.#checkOrderMenuIsFormat(orderMenu);
       this.#checkOrderMenuIsExist(orderMenu);
@@ -32,14 +52,9 @@ class UserDTO {
   }
 
   #checkOrderMenuIsExist(orderMenu) {
-    const menuCategoryList = Object.keys(MENU);
-    let isExist = false;
-    menuCategoryList.forEach((menuCategory) => {
-      const menuName = orderMenu.split(CONSTANTS.countSplitChar)[0];
-      const eventMenuList = MENU[menuCategory];
-      if (eventMenuList.has(menuName)) isExist = true;
-    });
-    if (!isExist) throw new Error(ERROR_MESSAGE.isNotOrderMenuFormat);
+    const menuName = orderMenu.split(CONSTANTS.countSplitChar)[0];
+    const category = MENUFUNC.getCategory(menuName);
+    if (category === false) throw new Error(ERROR_MESSAGE.isNotOrderMenuFormat);
   }
 
   #checkOrderMenuIsDuplicate(orderMenus) {

@@ -15,7 +15,7 @@ const ERROR_MESSAGE = Object.freeze({
   isNotAPI: '[ERROR] 유효하지 않은 URL 입니다. 다시 입력해 주세요',
   isNotOrderMenuFormat: '[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.',
   isDuplicate: '[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.',
-  isAllBeverage: '[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.',
+  isAllBeverage: '[ERROR] 음료만 주문 시, 주문할 수 없습니다.',
 });
 
 export { OUTPUT_MESSAGE, INPUT_MESSAGE, ERROR_MESSAGE };
