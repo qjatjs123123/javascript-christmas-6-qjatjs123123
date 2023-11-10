@@ -51,6 +51,7 @@ class EventPlanner {
     OutputView.printDiscountHistory(responseData.getDisCountHistory());
     OutputView.printAllDiscountAmount(responseData.getAllDiscountAmount());
     OutputView.printPaymentTotal(responseData.getPaymentTotal());
+    OutputView.printEventBadge(responseData.eventBadge);
   };
 
   ajax = async (url, data, callback) => {

@@ -20,6 +20,11 @@ const OutputView = {
     Console.print(OUTPUT_MESSAGE.paymentTotal(paymentTotal));
   },
 
+  printEventBadge(badge) {
+    Console.print(OUTPUT_MESSAGE.eventBadgeTitle);
+    Console.print(OUTPUT_MESSAGE.eventBadge(badge));
+  },
+
   printAllDiscountAmount(allDiscountAmount) {
     Console.print(OUTPUT_MESSAGE.allDiscountAmountTitle);
     Console.print(OUTPUT_MESSAGE.allDiscountAmount(allDiscountAmount));
