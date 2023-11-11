@@ -1,5 +1,3 @@
-import { CONSTANTS } from '../../Util/Constants.js';
-
 class SpecialDiscount {
   static instance = null;
 
@@ -11,9 +9,7 @@ class SpecialDiscount {
   }
 
   discount(userDTO) {
-    if (CONSTANTS.specialDiscount.includes(userDTO.getExpectedVisitDate())) {
-      userDTO.setSpecialDiscount();
-    }
+    userDTO.setSpecialDiscount();
   }
 }
 
