@@ -1,4 +1,3 @@
-/* eslint-disable no-return-await */
 import OutputView from '../OutputView.js';
 import InputView from '../InputView.js';
 import HttpRequest from './HttpRequest.js';
@@ -31,40 +30,30 @@ class EventPlanner {
 
   requestMenuAndCount = async () => {
     const menuAndCount = await InputView.readOrderMenuAndCount();
-    const responseData = await this.ajax(
-      RESTFULAPI.orderMenuAndCount,
-      {
-        userDTO: this.#userDTO,
-        menuAndCount,
-      },
-      this.requestMenuAndCount,
-    );
-    if (responseData) this.#userDTO = responseData;
+    const requestData = { userDTO: this.#userDTO, menuAndCount };
+    await this.ajax(RESTFULAPI.orderMenuAndCount, requestData, this.requestMenuAndCount);
   };
 
   requestVisitDate = async () => {
     const expectedVisitDate = await InputView.readDate();
-    const responseData = await this.ajax(
-      RESTFULAPI.dateValidation,
-      expectedVisitDate,
-      this.requestVisitDate,
-    );
-    if (responseData) this.#userDTO = responseData;
+    await this.ajax(RESTFULAPI.dateValidation, expectedVisitDate, this.requestVisitDate);
   };
 
   requestResultDiscountInfo = async () => {
-    const responseData = await this.ajax(RESTFULAPI.getResultDiscountInfo, this.#userDTO, null);
-    if (responseData) this.#userDTO = responseData;
+    await this.ajax(RESTFULAPI.getResultDiscountInfo, this.#userDTO, null);
   };
 
   ajax = async (url, data, callback) => {
     const httpRequest = new HttpRequest(url, data);
     const httpResponse = this.#server.requestAPI(httpRequest);
+
     if (httpResponse.status === CONSTANTS.error) {
       OutputView.printError(httpResponse.responseData);
-      return await callback();
+      await callback();
+      return;
     }
-    return httpResponse.responseData;
+
+    this.#userDTO = httpResponse.responseData;
   };
 }
 
