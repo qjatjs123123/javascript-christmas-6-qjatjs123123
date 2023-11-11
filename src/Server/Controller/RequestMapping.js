@@ -21,15 +21,17 @@ class RequestMapping {
   }
 
   getResponseData(httpRequest) {
-    switch (httpRequest.restfulAPI) {
+    const { restfulAPI, body } = httpRequest.getHttpRequest();
+
+    switch (restfulAPI) {
       case API.dateValidation:
-        return this.#eventController.checkDateInvalid(httpRequest.body);
+        return this.#eventController.handlerVisitDate(body);
 
       case API.orderMenuAndCount:
-        return this.#eventController.handlerOrderMenuAndCount(httpRequest.body);
+        return this.#eventController.handlerOrderMenuAndCount(body);
 
       case API.getResultDiscountInfo:
-        return this.#eventController.handlerDiscountEvent(httpRequest.body);
+        return this.#eventController.handlerDiscountEvent(body);
 
       default:
         throw new Error(ERROR_MESSAGE.isNotAPI);

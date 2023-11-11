@@ -27,14 +27,14 @@ class EventController {
     this.#eventBadge = new EventBadge();
 
     this.discountEvents = [
-      { event: this.#christmasDday, checker: this.#calendar.isChristmasDdayEvent },
-      { event: this.#weekday, checker: this.#calendar.isWeekDayEvent },
-      { event: this.#weekend, checker: this.#calendar.isWeekEndEvent },
-      { event: this.#special, checker: this.#calendar.isSpecialEvent },
+      { event: this.#christmasDday, isApplyEvent: this.#calendar.isChristmasDdayEvent },
+      { event: this.#weekday, isApplyEvent: this.#calendar.isWeekDayEvent },
+      { event: this.#weekend, isApplyEvent: this.#calendar.isWeekEndEvent },
+      { event: this.#special, isApplyEvent: this.#calendar.isSpecialEvent },
     ];
   }
 
-  checkDateInvalid(expectedVisitDate) {
+  handlerVisitDate(expectedVisitDate) {
     const userDTO = new UserDTO(expectedVisitDate);
     userDTO.setExpectedVisitDate(expectedVisitDate);
     return userDTO;
@@ -53,8 +53,8 @@ class EventController {
   }
 
   #applyEvent(visitDay, userDTO) {
-    this.discountEvents.forEach(({ event, checker }) => {
-      if (checker.call(this.#calendar, visitDay)) event.discount(userDTO);
+    this.discountEvents.forEach(({ event, isApplyEvent }) => {
+      if (isApplyEvent.call(this.#calendar, visitDay)) event.discount(userDTO);
     });
 
     this.#freeGift.isFreeGift(userDTO);
