@@ -39,7 +39,7 @@ class EventController {
   }
 
   handlerDiscountEvent(userDTO) {
-    const visitDay = userDTO.expectedVisitDate;
+    const visitDay = userDTO.getExpectedVisitDate();
     if (this.#isUnderEventLimitAmount(userDTO)) return userDTO;
 
     if (this.#calendar.isChristmasDdayEvent(visitDay)) this.#christmasDday.discount(userDTO);

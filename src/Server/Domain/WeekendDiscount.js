@@ -11,13 +11,13 @@ class WeekendDiscount {
   }
 
   discount(userDTO) {
-    const userMenu = userDTO.orderMenu;
+    const userMenuWithCategory = userDTO.getUserMenuWithCategory();
     const category = CONSTANTS.weekendDiscountCategory;
 
-    if (category in userMenu) {
+    if (category in userMenuWithCategory) {
       let discountTotal = 0;
-      userMenu[category].forEach((ordermenu) => {
-        discountTotal += -CONSTANTS.discountAmount * ordermenu.menuCount;
+      userMenuWithCategory[category].forEach((userMenu) => {
+        discountTotal += -CONSTANTS.discountAmount * userMenu.menuCount;
       });
       userDTO.setWeekEndDiscount(discountTotal);
     }

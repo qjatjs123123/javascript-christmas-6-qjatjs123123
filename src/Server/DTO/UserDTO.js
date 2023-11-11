@@ -3,12 +3,11 @@ import Validation from './Validation.js';
 
 class UserDTO {
   #expectedVisitDate;
-  #orderMenu;
   #disCountHistory;
   #eventBadge;
+  #inputOrderMenu;
 
   constructor() {
-    this.#orderMenu = {};
     this.#disCountHistory = [];
     this.#eventBadge = CONSTANTS.noEventWord;
   }
@@ -53,15 +52,7 @@ class UserDTO {
   setOrderMenu(menuAndCount) {
     const orderMenus = menuAndCount.split(CONSTANTS.menuSplitChar);
     this.#checkOrderMenuInvalid(orderMenus);
-
-    orderMenus.forEach((orderMenu) => {
-      const [menuName, menuCount] = orderMenu.split(CONSTANTS.countSplitChar);
-      const category = MENUFUNC.getCategory(menuName);
-      const menuObject = { menuName, menuCount: Number(menuCount) };
-
-      this.#orderMenu[category] = this.#orderMenu[category] ?? [];
-      this.#orderMenu[category].push(menuObject);
-    });
+    this.#inputOrderMenu = menuAndCount;
   }
 
   #checkOrderMenuInvalid(orderMenus) {
@@ -74,28 +65,37 @@ class UserDTO {
     Validation.checkOrderMenuIsLength(orderMenus);
   }
 
-  get orderMenu() {
-    return this.#orderMenu;
-  }
-
-  get expectedVisitDate() {
+  getExpectedVisitDate() {
     return this.#expectedVisitDate;
   }
 
-  get disCountHistory() {
-    return this.#disCountHistory;
+  getEventBadge() {
+    return this.#eventBadge;
   }
 
-  get eventBadge() {
-    return this.#eventBadge;
+  getUserMenuWithCategory() {
+    const orderMenus = this.#inputOrderMenu.split(CONSTANTS.menuSplitChar);
+    const userMenuWithCategory = {};
+
+    orderMenus.forEach((orderMenu) => {
+      const [menuName, menuCount] = orderMenu.split(CONSTANTS.countSplitChar);
+      const category = MENUFUNC.getCategory(menuName);
+      const menuObject = { menuName, menuCount: Number(menuCount) };
+
+      userMenuWithCategory[category] = userMenuWithCategory[category] ?? [];
+      userMenuWithCategory[category].push(menuObject);
+    });
+
+    return userMenuWithCategory;
   }
 
   getUserMenu() {
     let userMenu = [];
-    const categorys = Object.keys(this.#orderMenu);
+    const userMenuWithCategory = this.getUserMenuWithCategory();
+    const categorys = Object.keys(userMenuWithCategory);
 
     categorys.forEach((category) => {
-      userMenu = [...userMenu, ...this.#orderMenu[category]];
+      userMenu = [...userMenu, ...userMenuWithCategory[category]];
     });
 
     return userMenu;
