@@ -9,9 +9,10 @@ class App {
 
   async run() {
     this.#EventPlanner.printWelcomeMessage();
-    await this.#EventPlanner.inputExpectedVisitDate();
-    await this.#EventPlanner.inputOrderMenuAndCount();
+    await this.#EventPlanner.requestVisitDate();
+    await this.#EventPlanner.requestMenuAndCount();
     await this.#EventPlanner.requestResultDiscountInfo();
+    this.#EventPlanner.printResultDiscountInfo();
   }
 }
 

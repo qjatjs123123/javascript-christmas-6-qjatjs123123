@@ -18,7 +18,18 @@ class EventPlanner {
     OutputView.printWelcomeMessage();
   }
 
-  inputOrderMenuAndCount = async () => {
+  printResultDiscountInfo() {
+    OutputView.printEventPreviewMessage(this.#userDTO.getExpectedVisitDate());
+    OutputView.printMenu(this.#userDTO.getUserMenu());
+    OutputView.printOriginalOrderAmount(this.#userDTO.getOriginalOrderAmount());
+    OutputView.printFreeGift(this.#userDTO.getFreeGift());
+    OutputView.printDiscountHistory(this.#userDTO.getDisCountHistory());
+    OutputView.printAllDiscountAmount(this.#userDTO.getAllDiscountAmount());
+    OutputView.printPaymentTotal(this.#userDTO.getPaymentTotal());
+    OutputView.printEventBadge(this.#userDTO.getEventBadge());
+  }
+
+  requestMenuAndCount = async () => {
     const menuAndCount = await InputView.readOrderMenuAndCount();
     const responseData = await this.ajax(
       RESTFULAPI.orderMenuAndCount,
@@ -26,32 +37,24 @@ class EventPlanner {
         userDTO: this.#userDTO,
         menuAndCount,
       },
-      this.inputOrderMenuAndCount,
+      this.requestMenuAndCount,
     );
     if (responseData) this.#userDTO = responseData;
   };
 
-  inputExpectedVisitDate = async () => {
+  requestVisitDate = async () => {
     const expectedVisitDate = await InputView.readDate();
     const responseData = await this.ajax(
       RESTFULAPI.dateValidation,
       expectedVisitDate,
-      this.inputExpectedVisitDate,
+      this.requestVisitDate,
     );
     if (responseData) this.#userDTO = responseData;
   };
 
   requestResultDiscountInfo = async () => {
     const responseData = await this.ajax(RESTFULAPI.getResultDiscountInfo, this.#userDTO, null);
-
-    OutputView.printEventPreviewMessage(responseData.expectedVisitDate);
-    OutputView.printMenu(responseData.getUserMenu());
-    OutputView.printOriginalOrderAmount(responseData.getOriginalOrderAmount());
-    OutputView.printFreeGift(responseData.getFreeGift());
-    OutputView.printDiscountHistory(responseData.getDisCountHistory());
-    OutputView.printAllDiscountAmount(responseData.getAllDiscountAmount());
-    OutputView.printPaymentTotal(responseData.getPaymentTotal());
-    OutputView.printEventBadge(responseData.getEventBadge());
+    if (responseData) this.#userDTO = responseData;
   };
 
   ajax = async (url, data, callback) => {

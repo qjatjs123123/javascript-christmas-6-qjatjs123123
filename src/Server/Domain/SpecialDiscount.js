@@ -11,7 +11,7 @@ class SpecialDiscount {
   }
 
   discount(userDTO) {
-    if (CONSTANTS.specialDiscount.includes(userDTO.expectedVisitDate)) {
+    if (CONSTANTS.specialDiscount.includes(userDTO.getExpectedVisitDate())) {
       userDTO.setSpecialDiscount();
     }
   }

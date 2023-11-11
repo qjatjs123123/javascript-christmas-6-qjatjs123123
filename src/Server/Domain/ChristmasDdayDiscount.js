@@ -11,7 +11,7 @@ class ChristmasDdayDiscount {
   }
 
   discount(userDTO) {
-    const visitDay = userDTO.expectedVisitDate;
+    const visitDay = userDTO.getExpectedVisitDate();
     const dayGap = visitDay - CONSTANTS.christMasEventStartDay;
 
     userDTO.setChristmasDiscount(-1000 - dayGap * 100);

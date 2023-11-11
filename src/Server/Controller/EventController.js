@@ -25,6 +25,13 @@ class EventController {
     this.#special = new SpecialDiscount();
     this.#freeGift = new FreeGiftEvent();
     this.#eventBadge = new EventBadge();
+
+    this.discountEvents = [
+      { event: this.#christmasDday, checker: this.#calendar.isChristmasDdayEvent },
+      { event: this.#weekday, checker: this.#calendar.isWeekDayEvent },
+      { event: this.#weekend, checker: this.#calendar.isWeekEndEvent },
+      { event: this.#special, checker: this.#calendar.isSpecialEvent },
+    ];
   }
 
   checkDateInvalid(expectedVisitDate) {
@@ -40,20 +47,23 @@ class EventController {
 
   handlerDiscountEvent(userDTO) {
     const visitDay = userDTO.getExpectedVisitDate();
-    if (this.#isUnderEventLimitAmount(userDTO)) return userDTO;
+    if (!this.#canApplyEvent(userDTO)) return userDTO;
 
-    if (this.#calendar.isChristmasDdayEvent(visitDay)) this.#christmasDday.discount(userDTO);
-    if (this.#calendar.isWeekDayEvent(visitDay)) this.#weekday.discount(userDTO);
-    if (this.#calendar.isWeekEndEvent(visitDay)) this.#weekend.discount(userDTO);
-    if (this.#calendar.isSpecialEvent(visitDay)) this.#special.discount(userDTO);
+    return this.#applyEvent(visitDay, userDTO);
+  }
+
+  #applyEvent(visitDay, userDTO) {
+    this.discountEvents.forEach(({ event, checker }) => {
+      if (checker.call(this.#calendar, visitDay)) event.discount(userDTO);
+    });
 
     this.#freeGift.isFreeGift(userDTO);
     this.#eventBadge.getEventBadge(userDTO);
     return userDTO;
   }
 
-  #isUnderEventLimitAmount(userDTO) {
-    if (userDTO.getOriginalOrderAmount() < CONSTANTS.eventLimitAmount) return true;
+  #canApplyEvent(userDTO) {
+    if (userDTO.getOriginalOrderAmount() >= CONSTANTS.eventLimitAmount) return true;
     return false;
   }
 }
