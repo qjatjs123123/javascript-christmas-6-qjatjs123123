@@ -10,27 +10,20 @@ import { CONSTANTS } from '../../Util/Constants.js';
 
 class EventController {
   #calendar;
-  #christmasDday;
-  #weekday;
-  #weekend;
-  #special;
+  #discountEvents;
   #freeGift;
   #eventBadge;
 
   constructor() {
     this.#calendar = new Calendar();
-    this.#christmasDday = new ChristmasDdayDiscount();
-    this.#weekday = new WeekdayDiscount();
-    this.#weekend = new WeekendDiscount();
-    this.#special = new SpecialDiscount();
     this.#freeGift = new FreeGiftEvent();
     this.#eventBadge = new EventBadge();
 
-    this.discountEvents = [
-      { event: this.#christmasDday, isApplyEvent: this.#calendar.isChristmasDdayEvent },
-      { event: this.#weekday, isApplyEvent: this.#calendar.isWeekDayEvent },
-      { event: this.#weekend, isApplyEvent: this.#calendar.isWeekEndEvent },
-      { event: this.#special, isApplyEvent: this.#calendar.isSpecialEvent },
+    this.#discountEvents = [
+      { event: new ChristmasDdayDiscount(), canApplyEvent: this.#calendar.isChristmasDdayEvent },
+      { event: new WeekdayDiscount(), canApplyEvent: this.#calendar.isWeekDayEvent },
+      { event: new WeekendDiscount(), canApplyEvent: this.#calendar.isWeekEndEvent },
+      { event: new SpecialDiscount(), canApplyEvent: this.#calendar.isSpecialEvent },
     ];
   }
 
@@ -47,14 +40,14 @@ class EventController {
 
   handlerDiscountEvent(userDTO) {
     const visitDay = userDTO.getExpectedVisitDate();
-    if (!this.#canApplyEvent(userDTO)) return userDTO;
+    if (!this.#canApplyAllEvents(userDTO)) return userDTO;
 
-    return this.#applyEvent(visitDay, userDTO);
+    return this.#applyAllEvent(visitDay, userDTO);
   }
 
-  #applyEvent(visitDay, userDTO) {
-    this.discountEvents.forEach(({ event, isApplyEvent }) => {
-      if (isApplyEvent.call(this.#calendar, visitDay)) event.discount(userDTO);
+  #applyAllEvent(visitDay, userDTO) {
+    this.#discountEvents.forEach(({ event, canApplyEvent }) => {
+      if (canApplyEvent.call(this.#calendar, visitDay)) event.discount(userDTO);
     });
 
     this.#freeGift.isFreeGift(userDTO);
@@ -62,7 +55,7 @@ class EventController {
     return userDTO;
   }
 
-  #canApplyEvent(userDTO) {
+  #canApplyAllEvents(userDTO) {
     if (userDTO.getOriginalOrderAmount() >= CONSTANTS.eventLimitAmount) return true;
     return false;
   }
