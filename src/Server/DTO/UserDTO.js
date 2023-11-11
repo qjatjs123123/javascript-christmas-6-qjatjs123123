@@ -1,15 +1,20 @@
+/* eslint-disable prettier/prettier */
 import { CONSTANTS, MENU, MENUFUNC } from '../../Util/Constants.js';
 import Validation from './Validation.js';
 
 class UserDTO {
   #expectedVisitDate;
-  #disCountHistory;
+  #discountHistory;
   #eventBadge;
   #inputOrderMenu;
 
   constructor() {
-    this.#disCountHistory = [];
+    this.#discountHistory = [];
     this.#eventBadge = CONSTANTS.noEventWord;
+  }
+
+  #addDiscountHistory(eventName, discount) {
+    this.#discountHistory.push({ eventName, discount });
   }
 
   setEventBadge(badge) {
@@ -17,31 +22,23 @@ class UserDTO {
   }
 
   setFreeGift() {
-    const eventObject = {
-      eventName: CONSTANTS.freeGiftEventName,
-      discount: -CONSTANTS.freeGift.menuPrice,
-    };
-    this.#disCountHistory.push(eventObject);
+    this.#addDiscountHistory(CONSTANTS.freeGiftEventName, -CONSTANTS.freeGift.menuPrice);
   }
 
   setSpecialDiscount() {
-    const eventObject = { eventName: CONSTANTS.specialEventName, discount: -1000 };
-    this.#disCountHistory.push(eventObject);
+    this.#addDiscountHistory(CONSTANTS.specialEventName, -1000);
   }
 
   setWeekDayDiscount(discountTotal) {
-    const eventObject = { eventName: CONSTANTS.weekdayEventName, discount: discountTotal };
-    this.#disCountHistory.push(eventObject);
+    this.#addDiscountHistory(CONSTANTS.weekdayEventName, discountTotal);
   }
 
   setWeekEndDiscount(discountTotal) {
-    const eventObject = { eventName: CONSTANTS.weekendEventName, discount: discountTotal };
-    this.#disCountHistory.push(eventObject);
+    this.#addDiscountHistory(CONSTANTS.weekendEventName, discountTotal);
   }
 
   setChristmasDiscount(discount) {
-    const eventObject = { eventName: CONSTANTS.christmasDdayEventName, discount };
-    this.#disCountHistory.push(eventObject);
+    this.#addDiscountHistory(CONSTANTS.christmasDdayEventName, discount);
   }
 
   setExpectedVisitDate(expectedVisitedDate) {
@@ -112,22 +109,17 @@ class UserDTO {
   }
 
   getAllDiscountAmount() {
-    return this.#disCountHistory.reduce((benefit, { discount }) => {
-      return benefit + discount;
-    }, 0);
+    return this.#discountHistory.reduce((benefit, { discount }) => benefit + discount, 0);
   }
 
   getFreeGift() {
-    const isFreeGift = this.#disCountHistory.some(
-      (userEvent) => userEvent.eventName === CONSTANTS.freeGiftEventName,
-    );
-    if (isFreeGift) return CONSTANTS.freeGift;
-    return CONSTANTS.noEventWord;
+    return this.#discountHistory.some((userEvent) => userEvent.eventName === CONSTANTS.freeGiftEventName)
+      ? CONSTANTS.freeGift
+      : CONSTANTS.noEventWord;
   }
 
   getDisCountHistory() {
-    if (this.#disCountHistory.length === 0) return CONSTANTS.noEventWord;
-    return this.#disCountHistory;
+    return this.#discountHistory.length === 0 ? CONSTANTS.noEventWord : this.#discountHistory;
   }
 
   getPaymentTotal() {
