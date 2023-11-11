@@ -27,18 +27,18 @@ class EventController {
     ];
   }
 
-  handlerVisitDate(expectedVisitDate) {
+  handleVisitDate(expectedVisitDate) {
     const userDTO = new UserDTO(expectedVisitDate);
     userDTO.setExpectedVisitDate(expectedVisitDate);
     return userDTO;
   }
 
-  handlerOrderMenuAndCount({ userDTO, menuAndCount }) {
+  handleOrderMenuAndCount({ userDTO, menuAndCount }) {
     userDTO.setOrderMenu(menuAndCount);
     return userDTO;
   }
 
-  handlerDiscountEvent(userDTO) {
+  handleDiscountEvent(userDTO) {
     const visitDay = userDTO.getExpectedVisitDate();
     if (!this.#canApplyAllEvents(userDTO)) return userDTO;
 

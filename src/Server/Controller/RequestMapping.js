@@ -25,13 +25,13 @@ class RequestMapping {
 
     switch (restfulAPI) {
       case API.dateValidation:
-        return this.#eventController.handlerVisitDate(body);
+        return this.#eventController.handleVisitDate(body);
 
       case API.orderMenuAndCount:
-        return this.#eventController.handlerOrderMenuAndCount(body);
+        return this.#eventController.handleOrderMenuAndCount(body);
 
       case API.getResultDiscountInfo:
-        return this.#eventController.handlerDiscountEvent(body);
+        return this.#eventController.handleDiscountEvent(body);
 
       default:
         throw new Error(ERROR_MESSAGE.isNotAPI);

@@ -10,22 +10,26 @@ class EventBadge {
     return EventBadge.instance;
   }
 
-  getEventBadge(userDTO) {
-    const benefit = -userDTO.getAllDiscountAmount();
-
+  #decideBadge(benefit) {
     switch (true) {
       case benefit >= CONSTANTS.santaBadge.limitAmount:
-        return userDTO.setEventBadge(CONSTANTS.santaBadge.badgeName);
+        return CONSTANTS.santaBadge.badgeName;
 
       case benefit >= CONSTANTS.treeBadge.limitAmount:
-        return userDTO.setEventBadge(CONSTANTS.treeBadge.badgeName);
+        return CONSTANTS.treeBadge.badgeName;
 
       case benefit >= CONSTANTS.starBadge.limitAmount:
-        return userDTO.setEventBadge(CONSTANTS.starBadge.badgeName);
+        return CONSTANTS.starBadge.badgeName;
 
       default:
-        return 0;
+        return null;
     }
+  }
+
+  getEventBadge(userDTO) {
+    const benefit = -userDTO.getAllDiscountAmount();
+    const badgeName = this.#decideBadge(benefit);
+    userDTO.setEventBadge(badgeName);
   }
 }
 
