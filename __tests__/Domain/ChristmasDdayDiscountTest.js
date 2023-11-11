@@ -20,7 +20,7 @@ describe('크리스마스 디데이 할인 테스트', () => {
       { input: 25, expected: -3400 },
     ];
 
-    test.each(testCases)('크리스마스 디데이 할인 금액은 100원씩 증가한다.', ({ input, expected }) => {
+    test.each(testCases)('getDisCountHistory에서 할인된 금액 $expected를 반환한다.', ({ input, expected }) => {
       // when
       userDTO.setExpectedVisitDate(input);
       userDTO.setOrderMenu(inputOrderMenu);
