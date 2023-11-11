@@ -3,7 +3,7 @@ import WeekendDiscount from '../../src/Server/Domain/WeekendDiscount.js';
 import UserDTO from '../../src/Server/DTO/UserDTO.js';
 import { CONSTANTS } from '../../src/Util/Constants.js';
 
-describe('평일 할인 도메인 테스트', () => {
+describe('주말 할인 도메인 테스트', () => {
   let weekend;
   let userDTO;
 
