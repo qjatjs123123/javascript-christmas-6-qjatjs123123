@@ -50,7 +50,7 @@ class EventController {
       if (canApplyEvent.call(this.#calendar, visitDay)) event.discount(userDTO);
     });
 
-    this.#freeGift.isFreeGift(userDTO);
+    this.#freeGift.getFreeGift(userDTO);
     this.#eventBadge.getEventBadge(userDTO);
     return userDTO;
   }

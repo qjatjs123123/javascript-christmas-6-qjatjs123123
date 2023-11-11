@@ -10,10 +10,12 @@ class FreeGiftEvent {
     return FreeGiftEvent.instance;
   }
 
-  isFreeGift(userDTO) {
-    if (userDTO.getOriginalOrderAmount() >= CONSTANTS.freeGiftLimitAmount) {
-      userDTO.setFreeGift();
-    }
+  #canGetFreeGift(userDTO) {
+    return userDTO.getOriginalOrderAmount() >= CONSTANTS.freeGiftLimitAmount;
+  }
+
+  getFreeGift(userDTO) {
+    if (this.#canGetFreeGift(userDTO)) userDTO.setFreeGift();
   }
 }
 
