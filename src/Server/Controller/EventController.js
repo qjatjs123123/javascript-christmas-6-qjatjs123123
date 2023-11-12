@@ -56,8 +56,7 @@ class EventController {
   }
 
   #canApplyAllEvents(userDTO) {
-    if (userDTO.getOriginalOrderAmount() >= CONSTANTS.eventLimitAmount) return true;
-    return false;
+    return userDTO.getOriginalOrderAmount() >= CONSTANTS.eventLimitAmount;
   }
 }
 

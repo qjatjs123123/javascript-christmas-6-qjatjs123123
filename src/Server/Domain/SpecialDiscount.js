@@ -1,3 +1,5 @@
+import { CONSTANTS } from '../../Util/Constants.js';
+
 class SpecialDiscount {
   static instance = null;
 
@@ -9,7 +11,7 @@ class SpecialDiscount {
   }
 
   discount(userDTO) {
-    userDTO.setSpecialDiscount();
+    userDTO.setSpecialDiscount(CONSTANTS.specialAmount);
   }
 }
 

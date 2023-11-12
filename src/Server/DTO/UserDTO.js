@@ -25,8 +25,8 @@ class UserDTO {
     this.#addDiscountHistory(CONSTANTS.freeGiftEventName, -CONSTANTS.freeGift.menuPrice);
   }
 
-  setSpecialDiscount() {
-    this.#addDiscountHistory(CONSTANTS.specialEventName, -1000);
+  setSpecialDiscount(discount) {
+    this.#addDiscountHistory(CONSTANTS.specialEventName, -discount);
   }
 
   setWeekDayDiscount(discountTotal) {
