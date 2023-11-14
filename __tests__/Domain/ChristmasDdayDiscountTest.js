@@ -1,18 +1,15 @@
 /* eslint-disable prettier/prettier */
-import ChristmasDdayDiscount from '../../src/Server/Domain/ChristmasDdayDiscount';
 import UserDTO from '../../src/Server/DTO/UserDTO.js';
 import EventController from '../../src/Server/Controller/EventController.js';
 import { CONSTANTS } from '../../src/Util/Constants.js';
 
 describe('크리스마스 디데이 할인 테스트', () => {
-  let christmas;
   let userDTO;
   let eventController;
   const inputOrderMenu = '티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1';
 
   beforeEach(() => {
     userDTO = new UserDTO();
-    christmas = new ChristmasDdayDiscount();
     eventController = new EventController();
   });
 
