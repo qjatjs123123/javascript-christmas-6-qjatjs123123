@@ -22,7 +22,7 @@ class EventBadge {
         return CONSTANTS.starBadge.badgeName;
 
       default:
-        return null;
+        return CONSTANTS.noEventWord;
     }
   }
 
