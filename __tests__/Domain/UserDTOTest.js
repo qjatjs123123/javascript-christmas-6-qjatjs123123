@@ -1,12 +1,38 @@
 import UserDTO from '../../src/Server/DTO/UserDTO.js';
+import EventController from '../../src/Server/Controller/EventController.js';
 import { CONSTANTS } from '../../src/Util/Constants.js';
 import { ERROR_MESSAGE } from '../../src/Util/Message.js';
 
 describe('UserDTO 도메인 테스트', () => {
   let userDTO;
+  let eventController;
 
   beforeEach(() => {
     userDTO = new UserDTO();
+    eventController = new EventController();
+  });
+
+  describe('총주문 금액이 10000원 미만이면 이벤트가 적용되지 않는다.', () => {
+    // given
+    const testCases = [
+      { day: 1, input: '시저샐러드-1', expected: CONSTANTS.noEventWord },
+      { day: 24, input: '아이스크림-1,제로콜라-1', expected: CONSTANTS.noEventWord },
+      { day: 23, input: '양송이수프-1', expected: CONSTANTS.noEventWord },
+      { day: 23, input: '양송이수프-1,제로콜라-1', expected: CONSTANTS.noEventWord },
+      { day: 23, input: '아이스크림-1', expected: CONSTANTS.noEventWord },
+    ];
+
+    test.each(testCases)('할인 내역 메서드 getDiscountHistory에 없음이 리턴되어야 한다.', ({ day, input, expected }) => {
+      // when
+      userDTO = new UserDTO();
+      userDTO.setExpectedVisitDate(day);
+      userDTO.setOrderMenu(input);
+      eventController.handleDiscountEvent(userDTO);
+      const discountHistory = userDTO.getDisCountHistory();
+
+      // then
+      expect(discountHistory).toBe(expected);
+    });
   });
 
   describe('방문 날짜 유효성 검사', () => {
